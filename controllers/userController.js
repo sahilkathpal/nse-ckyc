@@ -25,6 +25,7 @@ module.exports = function () {
       // set the user's local credentials
       newUser.username = req.body.username;
       newUser.password = createHash(req.body.password);
+      newUser.role = 1;
 
       // save the user
       newUser.save(function(err) {
