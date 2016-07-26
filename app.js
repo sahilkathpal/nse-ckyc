@@ -32,10 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth')();
+var banks = require('./routes/banks');
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
+app.use('/banks', banks);
 app.get('/nsepass', function (req, res) {
 
   res.send(bCrypt.hashSync("shanky", bCrypt.genSaltSync(10), null));
