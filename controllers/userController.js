@@ -83,8 +83,9 @@ module.exports = function () {
 
   function getAll() {
     User.find({role: 1}).select("name branch email address")
-    .then(function (obj) {
-      res.send(banks);
+    .then(function (banks) {
+      console.log(banks);
+      return res.render('banks/list', {banks: banks});
     })
   }
 
