@@ -4,9 +4,6 @@ var erisdb = require('eris-db');
 module.exports = function () {
  var bCrypt = require('bcrypt');
 
-  function createHash(password){
-    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-  }
 
   function create(req, res) {
 
@@ -84,9 +81,21 @@ module.exports = function () {
     });
   }
 
+  function getAll() {
+    User.find({role: 1}).select("name branch email address")
+    .then(function (banks) {
+      console.log(banks);
+      return res.render('banks/list', {banks: banks});
+    })
+  }
 
+
+  function createHash(password){
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+  }
 
   return {
-    create: create
+    create: create,
+    getAll: getAll
   }
 }
