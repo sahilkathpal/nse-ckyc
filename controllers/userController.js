@@ -36,8 +36,6 @@ module.exports = function () {
         console.log('User Registration succesful');
         createAndActivateAddress(newUser);
       });
-
-
   }
 
   function createAndActivateAddress(bank) {
@@ -48,8 +46,8 @@ module.exports = function () {
         }
         obj.accounts().genPrivAccount({}, function (error, keyPair) {
           var accountData = keyPair;
-          var newBankPromise = User.findOne({username: bank.username});
-          newBankPromise.then(function (newBank) {
+          User.findOne({username: bank.username})
+          .then(function (newBank) {
             newBank.address = accountData.address;
             newBank.pub_key = accountData.pub_key;
             newBank.priv_key = accountData.priv_key;
@@ -67,7 +65,7 @@ module.exports = function () {
             var myAddress = nse.address;
             var newKey = accountData.priv_key[1];
             var newAddress = accountData.address;
-            return res.send(accountData);
+            //return res.send(accountData);
             obj.txs().send(myKey, newAddress, 100, {}, function (error, result) {
               if (error) {
                 console.log(error);
@@ -88,6 +86,6 @@ module.exports = function () {
 
 
   return {
-    add: add
+    registerBank: registerBank
   }
 }
