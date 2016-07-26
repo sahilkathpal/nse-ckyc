@@ -77,7 +77,12 @@
           if ($scope.addBankFrm.$invalid) {
             return;
           }
-          // make http call
+          $http.post('/banks', bank)
+            .then(function (data) {
+              toastr.success('Bank is added');
+              $scope.addBankFrm.$setPristine();
+              $scope.bank = {};
+            }, fail);
         }
 
         function fail (err) {

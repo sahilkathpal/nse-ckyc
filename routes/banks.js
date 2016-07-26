@@ -15,6 +15,7 @@ module.exports = function () {
   router.post('/', user.create);
   router.get('/create', createBankFrm);
   router.get('/', user.getAll);
+  router.get('/:bankId', user.manageBank);
 
 
   return router;

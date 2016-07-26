@@ -1,0 +1,80 @@
+{% extends '../layouts/master.html' %}
+
+{% block content %}
+<div ng-controller="BankManageCtrl">
+
+  <section class="content">
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="">Manage bank</h3>
+            <div class="box-tools pull-right">
+              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <br>
+          <div class="box-body">
+
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>NAME</th>
+                    <th>BRANCH</th>
+                    <th>QUERY COUNT</th>
+                    <th>PAYMENT MADE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{bank.name}}</td>
+                    <td>{{bank.branch}}</td>
+                    <td>{{bank.count}}</td>
+                    <td>
+                      <button ng-click="redeem(bank)" class="btn btn-primary">Redeem</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    angular.module('ModelFameApp')
+      .controller('BankManageCtrl', ['$scope', '$http', function ($scope, $http) {
+        window.s = $scope;
+        $scope.bank = <%= JSON.stringify(bank) %>;
+        $scope.redeem = redeem;
+
+        function redeem (bank) {
+          var val = prompt('How much to redeem?');
+          if (! val) {
+            toastr.error('Please set an amount to redeem from the bank');
+            return;
+          }
+          // make http call
+        }
+
+        function fail (err) {
+          toastr.err('Something went wrong');
+          console.log(err);
+        }
+      }]);
+  </script>
+  <script>
+    $('#nav-banks-list').addClass('active');
+  </script>
+{% endblock %}
