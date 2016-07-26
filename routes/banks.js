@@ -8,7 +8,7 @@ module.exports = function () {
     return res.render('banks/create');
   }
   function listBanks (req, res, next) {
-    return res.render('banks/list');
+    return res.render('banks/list', user.getAll);
   }
 
   // router.get('/create', function (req, res) {
