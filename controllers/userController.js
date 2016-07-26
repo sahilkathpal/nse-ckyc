@@ -51,8 +51,8 @@ module.exports = function () {
           User.findOne({username: bank.username})
           .then(function (newBank) {
             newBank.address = accountData.address;
-            newBank.pub_key = accountData.pub_key;
-            newBank.priv_key = accountData.priv_key;
+            newBank.pub_key = accountData.pub_key[1];
+            newBank.priv_key = accountData.priv_key[1];
             newBank.save(function(err) {
               if (err){
                 console.log('Error in Saving user: '+err);
@@ -78,7 +78,7 @@ module.exports = function () {
                   console.log(error);
                   return;
                 }
-                console.log("Successfully registered new Bank");
+                console.log("Successfully registered new Bank" );
               })
             });
           });
