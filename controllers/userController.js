@@ -73,12 +73,13 @@ module.exports = function () {
                 console.log(error);
                 return;
               }
+              console.log(result);
               obj.txs().send(newKey, myAddress, 50, {}, function (error, result1) {
                 if(error) {
                   console.log(error);
                   return;
                 }
-                console.log("Successfully registered new Bank");
+                console.log(result1+"\nSuccessfully registered new Bank");
               })
             });
           });
