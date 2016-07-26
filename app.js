@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var auth = require('./routes/auth')(passport);
+var auth = require('./routes/auth')();
 
 app.use('/', routes);
 app.use('/users', users);

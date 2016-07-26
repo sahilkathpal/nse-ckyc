@@ -34,6 +34,7 @@ module.exports = function () {
         }
         console.log('User Registration succesful');
         createAndActivateAddress(newUser);
+        res.send("Done.");
       });
     });
   }
