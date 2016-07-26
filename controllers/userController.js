@@ -36,6 +36,7 @@ module.exports = function () {
         console.log('User Registration succesful');
         createAndActivateAddress(newUser);
       });
+    }
   }
 
   function createAndActivateAddress(bank) {
