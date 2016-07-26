@@ -8,7 +8,7 @@ module.exports = function () {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
   }
 
-  function registerBank(req, res) {
+  function create(req, res) {
 
     User.findOne({'username':req.body.username},function(err, user) {
       // In case of any error return
@@ -61,7 +61,7 @@ module.exports = function () {
               console.log('User Registration succesful');
             });
           })
-          User.findOne({role:"nse"})
+          User.findOne({role:9})
           .then(function (nse) {
             var myKey = nse.priv_key;
             var myAddress = nse.address;
@@ -88,6 +88,6 @@ module.exports = function () {
 
 
   return {
-    registerBank: registerBank
+    create: create
   }
 }

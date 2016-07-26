@@ -5,7 +5,7 @@ module.exports = function () {
 
   var user = require('../controllers/userController.js')();
 
-  router.post('/register', user.registerBank);
+
 
   return router;
 }
