@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
 app.set('view cache', false);
-swig.setDefaults({ cache: false });
+swig.setDefaults({ cache: false, varControls: ['<%=', '%>'] });
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

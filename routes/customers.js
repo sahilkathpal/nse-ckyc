@@ -3,16 +3,19 @@ var router = express.Router();
 
 module.exports = function () {
 
-  function query (req, res, next) {
+  function queryFrm (req, res, next) {
     return res.render('customers/query');
   }
-  function create (req, res, next) {
+  function createFrm (req, res, next) {
     return res.render('customers/create');
   }
+  function updateFrm (req, res, next) {
+    return res.render('customers/update', {ckyc: req.query.ckyc});
+  }
 
-  router.get('/query', query);
-  router.get('/create', create);
-  router.get('/update', query);
+  router.get('/query', queryFrm);
+  router.get('/create', createFrm);
+  router.get('/update', updateFrm);
 
 
   return router;

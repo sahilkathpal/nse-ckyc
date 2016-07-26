@@ -1,7 +1,7 @@
-{% extends '../layouts/master.html' %}
+{% extends 'layouts/master.html' %}
 
 {% block content %}
-<div ng-controller="BankIndexCtrl">
+<div ng-controller="IndexCtrl">
 
   <section class="content">
     <div class="row">
@@ -9,52 +9,49 @@
       <div class="col-md-9">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="">List of all banks</h3>
+            <h3 class="">Fetch customer data</h3>
             <div class="box-tools pull-right">
               <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
             </div>
           </div>
           <br>
           <div class="box-body">
-
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>NAME</th>
-                    <th>BRANCH</th>
-                    <th>*</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="progress progress-sm active">
+              <div class="progress-bar progress-bar-success progress-bar-striped" ng-style="style">
+                <span class="sr-only">20% Complete</span>
+              </div>
             </div>
+
+
 
           </div>
         </div>
       </div>
 
-      <!-- <div class="col-md-3">
+      <div class="col-md-3">
         <ul class="list-group">
+          <li class="list-group-item cur" ng-click="option = 'fd'" ng-class="{active: option == 'fd'}">
+            <span ng-show="completeFlag.fd" class="badge"><i class="fa fa-check"></i></span>
+            <i class="fa fa-credit-card"></i>
+            &nbsp; Search by cKYC
+          </li>
           <li class="list-group-item cur" ng-click="option = 'pd'" ng-class="{active: option == 'pd'}">
             <i class="fa fa-user"></i>
             <span ng-show="completeFlag.pd" style="color: geen;" class="badge"><i class="fa fa-check"></i></span>
-            &nbsp; Personal details
+            &nbsp; Search by PAN
           </li>
           <li class="list-group-item cur" ng-click="option = 'cd'" ng-class="{active: option == 'cd'}">
             <span ng-show="completeFlag.cd" class="badge"><i class="fa fa-check"></i></span>
             <i class="fa fa-briefcase"></i>
-            &nbsp; Company details
+            &nbsp; Search by Aadhar
+          </li>
+          <li class="list-group-item cur" ng-click="option = 'pgd'" ng-class="{active: option == 'pgd'}">
+            <span ng-show="completeFlag.pgd" class="badge"><i class="fa fa-check"></i></span>
+            <i class="fa fa-shopping-cart"></i>
+            &nbsp; Search by Passport
           </li>
         </ul>
-      </div> -->
-
+      </div>
     </div>
   </section>
 
@@ -65,14 +62,9 @@
 {% block javascript %}
   <script>
     angular.module('ModelFameApp')
-      .controller('BankIndexCtrl', ['$scope', '$http', function ($scope, $http) {
+      .controller('IndexCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
         window.s = $scope;
-        $scope.banks = formatBanks([]);
 
-        function formatBanks (banks) {
-
-          return banks;
-        }
         function fail (err) {
           toastr.err('Something went wrong');
           console.log(err);

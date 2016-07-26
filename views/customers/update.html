@@ -9,7 +9,7 @@
       <div class="col-md-9">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="">Fetch customer data</h3>
+            <h3 class="">Update customer data</h3>
             <div class="box-tools pull-right">
               <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
             </div>
@@ -22,33 +22,7 @@
               </div>
             </div>
 
-            {% include 'partials/query-forms.html' %}
-
-            <table ng-show="user" class="table table-hover">
-              <thead>
-                <tr>
-                  <th>CKYC</th>
-                  <th>NAME</th>
-                  <th>PAN</th>
-                  <th>AADHAR</th>
-                  <th>PASSPORT</th>
-                  <th>EDIT</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <a ng-href="/customers/update?ckyc={{user.ckyc}}">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            {% include 'partials/update-forms.html' %}
 
           </div>
         </div>
@@ -56,21 +30,24 @@
 
       <div class="col-md-3">
         <ul class="list-group">
+          <li class="list-group-item cur">
+            <input type="text" class="form-control" placeholder="Enter cKKYC no here .." ng-class="{anerror: ckycMissing}" ng-model="ckyc">
+          </li>
           <li class="list-group-item cur" ng-click="option = 'ckyc'" ng-class="{active: option == 'ckyc'}">
             <i class="fa fa-key"></i>
-            &nbsp; Search by cKYC
+            &nbsp; Update Name
           </li>
           <li class="list-group-item cur" ng-click="option = 'pan'" ng-class="{active: option == 'pan'}">
             <i class="fa fa-credit-card"></i>
-            &nbsp; Search by PAN
+            &nbsp; Update PAN
           </li>
           <li class="list-group-item cur" ng-click="option = 'aadhar'" ng-class="{active: option == 'aadhar'}">
             <i class="fa fa-list-alt"></i>
-            &nbsp; Search by Aadhar
+            &nbsp; Update Aadhar
           </li>
           <li class="list-group-item cur" ng-click="option = 'passport'" ng-class="{active: option == 'passport'}">
             <i class="fa fa-plane"></i>
-            &nbsp; Search by Passport
+            &nbsp; Update Passport
           </li>
         </ul>
       </div>
@@ -87,6 +64,8 @@
       .controller('CustomerQueryCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
         window.s = $scope;
         $scope.option = 'ckyc';
+        $scope.ckyc = '<%= ckyc %>';
+        $scope.ckycMissing = false;
 
         function fail (err) {
           toastr.err('Something went wrong');
@@ -95,6 +74,6 @@
       }]);
   </script>
   <script>
-    $('#nav-customers-query').addClass('active');
+    $('#nav-customers-update').addClass('active');
   </script>
 {% endblock %}
