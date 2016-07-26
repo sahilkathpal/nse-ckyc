@@ -1,0 +1,18 @@
+<form ng-submit="personalDetailsSave(o.personalDetails)" name="personalDetailsFrm" class="form" novalidate>
+  <div class="col-md-12">
+    <h3>Personal details</h3>
+    <br>
+  </div>
+  <div class="col-md-12">
+    <label>Current account number</label>
+    <div class="input-group">
+      <input required ng-model="o.personalDetails.account_no" type="text" class="form-control">
+      <span ng-click="fetchInfo(o.personalDetails.account_no)" class="input-group-addon cur"><i class="fa fa-check"></i></span>
+    </div>
+    <br>
+  </div>
+
+  <div class="col-md-12">
+    <button class="btn btn-primary" type="submit">Continue</button>
+  </div>
+</form>

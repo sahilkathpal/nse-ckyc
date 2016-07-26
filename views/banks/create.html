@@ -1,0 +1,66 @@
+{% extends '../layouts/master.html' %}
+
+{% block content %}
+<div ng-controller="BankCreateCtrl">
+
+  <section class="content">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="">Create banks</h3>
+            <div class="box-tools pull-right">
+              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+            </div>
+          </div>
+          <br>
+          <div class="box-body">
+
+            <form ng-submit="personalDetailsSave(o.personalDetails)" name="personalDetailsFrm" class="form" novalidate>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control">
+              </div>
+              <button class="btn btn-primary" type="submit">Continue</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item cur" ng-click="option = 'pd'" ng-class="{active: option == 'pd'}">
+            <i class="fa fa-user"></i>
+            <span ng-show="completeFlag.pd" style="color: geen;" class="badge"><i class="fa fa-check"></i></span>
+            &nbsp; Personal details
+          </li>
+          <li class="list-group-item cur" ng-click="option = 'cd'" ng-class="{active: option == 'cd'}">
+            <span ng-show="completeFlag.cd" class="badge"><i class="fa fa-check"></i></span>
+            <i class="fa fa-briefcase"></i>
+            &nbsp; Company details
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    angular.module('ModelFameApp')
+      .controller('BankCreateCtrl', ['$scope', '$http', function ($scope, $http) {
+        window.s = $scope;
+
+        function fail (err) {
+          toastr.err('Something went wrong');
+          console.log(err);
+        }
+      }]);
+  </script>
+{% endblock %}
