@@ -67,7 +67,7 @@
     angular.module('ModelFameApp')
       .controller('BankIndexCtrl', ['$scope', '$http', function ($scope, $http) {
         window.s = $scope;
-        $scope.banks = formatBanks([]);
+        $scope.banks = formatBanks(<%= JSON.stringify(banks) %>);
 
         function formatBanks (banks) {
 
