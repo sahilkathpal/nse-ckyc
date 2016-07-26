@@ -10,7 +10,7 @@ module.exports = function () {
 
   function registerBank(req, res) {
 
-    User.findOne({'username':username},function(err, user) {
+    User.findOne({'username':req.body.username},function(err, user) {
       // In case of any error return
       if (err){
         console.log('Error in SignUp: '+err);
@@ -21,11 +21,10 @@ module.exports = function () {
         console.log('User already exists');
         return;
       }
-      var newBank = createBank(req.body);
       var newUser = new User();
       // set the user's local credentials
-      newUser.username = bank.username;
-      newUser.password = createHash(bank.password);
+      newUser.username = req.body.username;
+      newUser.password = createHash(req.body.password);
 
       // save the user
       newUser.save(function(err) {
