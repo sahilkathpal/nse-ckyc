@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/ckyc');
 
 var app = express();
-
+var bCrypt = require("bcrypt");
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 passport = require('./passport/local.js')(passport, localStrategy);
@@ -36,6 +36,11 @@ var auth = require('./routes/auth')();
 app.use('/', routes);
 app.use('/users', users);
 app.use('/auth', auth);
+app.get('/nsepass', function (req, res) {
+
+  res.send(bCrypt.hashSync("shanky", bCrypt.genSaltSync(10), null));
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
