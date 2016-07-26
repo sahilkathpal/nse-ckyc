@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-module.exports = function (passport) {
-  /* GET users listing. */
-  router.post('/register', userController.register);
+module.exports = function () {
+
+  var user = require('../controllers/userController.js')();
+
+
+
   return router;
 }

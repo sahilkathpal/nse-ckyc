@@ -2,9 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 module.exports = function () {
-  var bank = require('../controllers/bankController.js')();
+  var user = require('../controllers/userController.js')();
 
-  router.post('/add', bankController.add());
+  // router.get('/create', function (req, res) {
+  //   res.render('');
+  // });
+  router.post('/', user.create);
+
 
   return router;
 }

@@ -2,15 +2,15 @@ var User = require('../models/User.js');
 var erisdb = require('eris-db');
 
 module.exports = function () {
-
+ var bCrypt = require('bcrypt');
 
   function createHash(password){
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
   }
 
-  function registerBank(req, res) {
+  function create(req, res) {
 
-    User.findOne({'username':username},function(err, user) {
+    User.findOne({'username':req.body.username},function(err, user) {
       // In case of any error return
       if (err){
         console.log('Error in SignUp: '+err);
@@ -21,11 +21,11 @@ module.exports = function () {
         console.log('User already exists');
         return;
       }
-      var newBank = createBank(req.body);
       var newUser = new User();
       // set the user's local credentials
-      newUser.username = bank.username;
-      newUser.password = createHash(bank.password);
+      newUser.username = req.body.username;
+      newUser.password = createHash(req.body.password);
+      newUser.role = 1;
 
       // save the user
       newUser.save(function(err) {
@@ -35,7 +35,9 @@ module.exports = function () {
         }
         console.log('User Registration succesful');
         createAndActivateAddress(newUser);
+        res.send("Done.");
       });
+    });
   }
 
   function createAndActivateAddress(bank) {
@@ -59,7 +61,7 @@ module.exports = function () {
               console.log('User Registration succesful');
             });
           })
-          User.findOne({role:"nse"})
+          User.findOne({role:9})
           .then(function (nse) {
             var myKey = nse.priv_key;
             var myAddress = nse.address;
@@ -86,6 +88,6 @@ module.exports = function () {
 
 
   return {
-    registerBank: registerBank
+    create: create
   }
 }

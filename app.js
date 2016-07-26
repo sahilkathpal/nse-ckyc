@@ -9,7 +9,7 @@ var swig = require('swig');
 mongoose.connect('mongodb://localhost/ckyc');
 
 var app = express();
-
+var bCrypt = require("bcrypt");
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 passport = require('./passport/local.js')(passport, localStrategy);
@@ -36,12 +36,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var routes = require('./routes/index');
-// var users = require('./routes/users');
-// var auth = require('./routes/auth')(passport);
+var users = require('./routes/users');
+var auth = require('./routes/auth')();
+var banks = require('./routes/banks')();
 
 app.use('/', routes);
-// app.use('/users', users);
-// app.use('/auth', auth);
+app.use('/users', users);
+app.use('/auth', auth);
+app.use('/banks', banks);
+app.get('/nsepass', function (req, res) {
+
+  res.send(bCrypt.hashSync("shanky", bCrypt.genSaltSync(10), null));
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
