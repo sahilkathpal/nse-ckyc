@@ -2,7 +2,7 @@ var User = require('../models/User.js');
 var erisdb = require('eris-db');
 
 module.exports = function () {
-
+ var bCrypt = require('bcrypt');
 
   function createHash(password){
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
