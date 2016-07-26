@@ -42,6 +42,7 @@ var banks = require('./routes/banks')();
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/customers', require('./routes/customers')());
 app.use('/auth', auth);
 app.use('/banks', banks);
 app.get('/nsepass', function (req, res) {

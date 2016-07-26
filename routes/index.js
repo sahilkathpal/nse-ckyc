@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../helpers/session');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,21 +8,8 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET Login page. */
-router.get('/login', guestOnly, function(req, res, next) {
+router.get('/login', auth.guestOnly, function(req, res, next) {
   res.render('sessions/login');
 });
-router.get('/test', guestOnly, function(req, res, next) {
-  res.render('banks/create');
-});
-
-function authOnly (req, res, next) {
-  if (! req.user) return res.redirect('/login');
-  next();
-}
-
-function guestOnly (req, res, next) {
-  if (req.user) return res.redirect('/');
-  next();
-}
 
 module.exports = router;
