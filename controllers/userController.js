@@ -81,7 +81,7 @@ module.exports = function () {
     });
   }
 
-  function getAll() {
+  function getAll(req, res) {
     User.find({role: 1}).select("name branch email address")
     .then(function (banks) {
       console.log(banks);
