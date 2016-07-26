@@ -78,7 +78,7 @@ module.exports = function () {
                   console.log(error);
                   return;
                 }
-                console.log("Successfully registered new Bank" );
+                console.log("Successfully registered new Bank");
               })
             });
           });
