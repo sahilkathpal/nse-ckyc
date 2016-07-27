@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../helpers/session');
 
 module.exports = function () {
   var user = require('../controllers/userController')();
@@ -9,10 +10,10 @@ module.exports = function () {
   }
 
   router.post('/', user.create);
-  router.get('/create', createBankFrm);
-  router.get('/', user.getAll);
-  router.get('/:bankId', user.manageBank);
-  router.get('/:bankId/redeem', user.redeem);
-  
+  router.get('/create', auth.authOnly, createBankFrm);
+  router.get('/', auth.authOnly, user.getAll);
+  router.get('/:bankId', auth.authOnly, user.manageBank);
+  router.get('/:bankId/redeem', auth.authOnly, user.redeem);
+
   return router;
 }

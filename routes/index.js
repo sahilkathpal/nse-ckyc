@@ -4,7 +4,7 @@ module.exports = function (passport) {
   var auth = require('../helpers/session');
 
   /* GET home page. */
-  router.get('/', function(req, res, next) {
+  router.get('/', auth.authOnly, function(req, res, next) {
     res.render('index', { title: 'Express' });
   });
 

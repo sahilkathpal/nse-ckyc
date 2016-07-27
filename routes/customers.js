@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../helpers/session');
 
 module.exports = function () {
   var customer = require("../controllers/customerController")();
@@ -14,9 +15,9 @@ module.exports = function () {
     return res.render('customers/update', {ckyc: req.query.ckyc});
   }
 
-  router.get('/query', queryFrm);
-  router.get('/create', createFrm);
-  router.get('/update', updateFrm);
+  router.get('/query', auth.authOnly, queryFrm);
+  router.get('/create', auth.authOnly, createFrm);
+  router.get('/update', auth.authOnly, updateFrm);
 
   router.post('/', customer.createCustomer);
   router.put('/update', customer.updateCustomer);
