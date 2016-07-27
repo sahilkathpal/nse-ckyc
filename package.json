@@ -6,21 +6,21 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "~0.8.7",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "eris-contracts": "^0.13.1",
+    "eris-db": "~0.15.0",
     "express": "~4.13.4",
+    "express-session": "~1.14.0",
     "hbs": "~4.0.0",
     "lodash": "^4.14.0",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "swig": "^1.4.2",
-    "eris-db": "~0.15.0",
     "mongoose": "~4.5.7",
-    "bcrypt": "~0.8.7",
-    "passport-local": "~1.0.0",
+    "morgan": "~1.7.0",
     "passport": "~0.3.2",
-    "express-session": "~1.14.0"
+    "passport-local": "~1.0.0",
+    "serve-favicon": "~2.3.0",
+    "swig": "^1.4.2"
   }
 }
