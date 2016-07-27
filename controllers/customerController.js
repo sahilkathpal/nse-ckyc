@@ -56,10 +56,10 @@ module.exports = function () {
   function createCustomer(req, res) {
     contractPromise.then(function (contract) {
       var obj = req.body;
-      contract.addCustomer(hex.str2hex(obj[0]['key'], str2hex(obj[0]['value']), function (error) {
+      contract.addCustomer(hex.str2hex(obj[0]['key'], hsx.str2hex(obj[0]['value']), function (error) {
         if(error) return res.send(error, 500);
         obj.slice(1).forEach(function (entry) {
-          contract.updateCustomer(str2hex(obj[0]['value']), str2hex(entry.key), str2hex(entry.value), function (error) {
+          contract.updateCustomer(hex.str2hex(obj[0]['value']), hex.str2hex(entry.key), hex.str2hex(entry.value), function (error) {
           });
         });
         return res.sendStatus(200);
@@ -69,7 +69,7 @@ module.exports = function () {
 
   function updateCustomer(req, res) {
     contractPromise.then(function (contract) {
-      contract.updateCustomer(str2hex(req.body.ckyc), str2hex(req.body.key), str2hex(req.body.value), function (error) {
+      contract.updateCustomer(hex.str2hex(req.body.ckyc), hex.str2hex(req.body.key), hex.str2hex(req.body.value), function (error) {
         if (error) return res.send(error, 500);
         return res.sendStatus(200);
       })
