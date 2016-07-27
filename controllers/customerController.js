@@ -56,9 +56,12 @@ module.exports = function () {
   function createCustomer(req, res) {
     contractPromise.then(function (contract) {
       var obj = req.body;
+      console.log("In contract");
       contract.addCustomer(hex.str2hex(obj[0]['key'], hsx.str2hex(obj[0]['value']), function (error) {
         if(error) return res.send(error, 500);
+        console.log("In add");
         obj.slice(1).forEach(function (entry) {
+          console.log("In update");
           contract.updateCustomer(hex.str2hex(obj[0]['value']), hex.str2hex(entry.key), hex.str2hex(entry.value), function (error) {
           });
         });
