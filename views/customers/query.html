@@ -37,10 +37,10 @@
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{user.name}}</td>
+                  <td>{{user.pan}}</td>
+                  <td>{{user.aadhar}}</td>
+                  <td>{{user.passport}}</td>
                   <td>
                     <a ng-href="/customers/update?ckyc={{user.ckyc}}">
                       <i class="fa fa-edit"></i>
@@ -87,6 +87,26 @@
       .controller('CustomerQueryCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
         window.s = $scope;
         $scope.option = 'ckyc';
+        $scope.val = '';
+        $scope.query = query;
+
+        function query () {
+          var obj = {
+            key: $scope.option,
+            value: $scope.val
+          }
+          // console.log(obj);
+          // return;
+          $http.post('/customers/fetch', obj)
+            .then(function (data) {
+              $scope.user = {
+                name: data.data[0],
+                pan: data.data[1],
+                aadhar: data.data[2],
+                passport: data.data[3]
+              }
+            }, fail);
+        }
 
         function fail (err) {
           toastr.error('Something went wrong');

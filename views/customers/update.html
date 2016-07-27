@@ -78,8 +78,11 @@
             alert('Please enter a valid value for: ' + key);
             return;
           }
-          var obj = {}; obj[key] = $scope.data[key];
-          obj.ckyc = $scope.ckyc;
+          var obj = {
+            key: key,
+            value: $scope.data[key],
+            ckyc: $scope.ckyc
+          };
           $http.put('/customers/update', obj)
             .then(function (data) {
               $scope.data[key] = '';

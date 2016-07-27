@@ -78,11 +78,14 @@
             return;
           }
           var customerDatas = _.reduce(customer, function (arr, val, key) {
-            var obj = {};
-            obj[key] = val;
-            arr.push(obj);
+            var obj = {
+              key: key,
+              value: val
+            };
+            if (val) arr.push(obj);
             return arr;
           }, []);
+          // console.log(customerDatas); return;
           $http.post('/customers', customerDatas)
             .then(function (data) {
               toastr.success('Customer is added');
