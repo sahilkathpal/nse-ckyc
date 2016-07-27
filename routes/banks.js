@@ -12,6 +12,7 @@ module.exports = function () {
   router.get('/create', createBankFrm);
   router.get('/', user.getAll);
   router.get('/:bankId', user.manageBank);
+  router.get('/:bankId/redeem', user.redeem);
 
 
   return router;

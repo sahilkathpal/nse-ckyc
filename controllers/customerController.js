@@ -78,7 +78,7 @@ module.exports = function () {
   }
 
   return {
-    getCustomer; getCustomer,
+    getCustomer: getCustomer,
     createCustomer: createCustomer,
     updateCustomer: updateCustomer
   }

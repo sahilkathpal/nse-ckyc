@@ -1,3 +1,4 @@
+var User = require('../models/user');
 module.exports = function () {
   var erisdbURL = "http://localhost:1337/rpc";
   return User.findOne({role: 9})
@@ -9,4 +10,5 @@ module.exports = function () {
     var contractsManager = erisC.newContractManagerDev(erisdbURL, accountData);
     var contract = contractsManager.newContractFactory(kycAbi).at(kycContractAddress);
     return contract;
+  })
 }

@@ -1,7 +1,7 @@
 {% extends '../layouts/master.html' %}
 
 {% block content %}
-<div ng-controller="BankCreateCtrl">
+<div ng-controller="CutomerCreateCtrl">
 
   <section class="content">
     <div class="row">
@@ -17,25 +17,25 @@
           <br>
           <div class="box-body">
 
-            <form ng-submit="addBank(bank)" name="addBankFrm" class="form" novalidate>
+            <form ng-submit="addCutomer(customer)" name="addCutomerFrm" class="form" novalidate>
               <div class="form-group">
                 <label>Name</label>
-                <input type="text" class="form-control" name="name" ng-model="bank.name" required>
+                <input type="text" class="form-control" name="name" ng-model="customer.name" required>
               </div>
 
               <div class="form-group">
                 <label>PAN no</label>
-                <input type="text" class="form-control" name="pan" ng-model="bank.pan">
+                <input type="text" class="form-control" name="pan" ng-model="customer.pan">
               </div>
 
               <div class="form-group">
                 <label>Aadhar no</label>
-                <input type="text" class="form-control" name="aadhar" ng-model="bank.aadhar" required>
+                <input type="text" class="form-control" name="aadhar" ng-model="customer.aadhar" required>
               </div>
 
               <div class="form-group">
                 <label>Passport no</label>
-                <input type="text" class="form-control" name="passport" ng-model="bank.passport" required>
+                <input type="text" class="form-control" name="passport" ng-model="customer.passport" required>
               </div>
               <button class="btn btn-primary" type="submit">Save</button>
             </form>
@@ -69,19 +69,30 @@
 {% block javascript %}
   <script>
     angular.module('ModelFameApp')
-      .controller('BankCreateCtrl', ['$scope', '$http', function ($scope, $http) {
+      .controller('CutomerCreateCtrl', ['$scope', '$http', function ($scope, $http) {
         window.s = $scope;
-        $scope.addBank = addBank;
+        $scope.addCutomer = addCutomer;
 
-        function addBank (bank) {
-          if ($scope.addBankFrm.$invalid) {
+        function addCutomer (customer) {
+          if ($scope.addCutomerFrm.$invalid) {
             return;
           }
-          // make http call
+          var customerDatas = _.reduce(customer, function (arr, val, key) {
+            var obj = {};
+            obj[key] = val;
+            arr.push(obj);
+            return arr;
+          }, []);
+          $http.post('/customers', customerDatas)
+            .then(function (data) {
+              toastr.success('Customer is added');
+              $scope.addCustomerFrm.$setPristine();
+              $scope.customer = {};
+            }, fail);
         }
 
         function fail (err) {
-          toastr.err('Something went wrong');
+          toastr.error('Something went wrong');
           console.log(err);
         }
       }]);

@@ -18,7 +18,11 @@ module.exports = function () {
   router.get('/create', createFrm);
   router.get('/update', updateFrm);
 
-  router.post('/query', );
+  router.post('/', customer.createCustomer);
+  router.put('/update', customer.updateCustomer);
+  router.post('/fetch', customer.getCustomer);
+
+  // router.post('/query', );
 
   return router;
 }

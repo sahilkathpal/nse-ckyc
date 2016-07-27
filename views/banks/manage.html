@@ -66,10 +66,14 @@
             return;
           }
           // make http call
+          $http.post('/banks/' + bank._id + '/redeem', {amount: val})
+            .then(function (data) {
+              bank.count -= val
+            }, fail)
         }
 
         function fail (err) {
-          toastr.err('Something went wrong');
+          toastr.error('Something went wrong');
           console.log(err);
         }
       }]);

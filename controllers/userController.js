@@ -1,6 +1,7 @@
 var User = require('../models/User.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 var erisdb = require('eris-db');
+var contractPromise = require('../helpers/contract')();
 
 module.exports = function () {
  var bCrypt = require('bcrypt');
@@ -88,13 +89,49 @@ module.exports = function () {
   function getAll(req, res) {
     User.find({role: 1}).select("name branch email address")
     .then(function (banks) {
+      console.log(banks);
       return res.render('banks/list', {banks: banks});
     });
   }
 
   function manageBank (req, res) {
     User.findOne({_id: new ObjectId(req.params.resourceId)}, function (err, bank) {
-      return res.render('banks/manage', {bank: bank});
+      if (err) return res.send(err, 500)
+      contractPromise.then(function (contract) {
+        contract.getMyCount(function (err, count) {
+          if (err) return res.send(err, 500)
+          bank.count = count
+          return res.render('banks/manage', {bank: bank})
+        })
+      })
+    })
+
+    // var bank;
+    // User.findOne({_id: new ObjectId(req.params.resourceId)}).exec()
+    // .then(function (bankData) {
+    //   bank = bankData;
+    //   return contractPromise;
+    // })
+    // .then(function (contract) {
+    //   contract.getMyCount(fetchedCount);
+    // })
+    // .catch(function (err) {
+    //   return res.send(err, 500);
+    // });
+    // function fetchedCount (err, count) {
+    //   if (err)
+    //     return res.send(err, 500);
+    //   bank.count = count;
+    //   return res.render('banks/manage', {bank: bank})
+    // }
+  }
+
+  function redeem (req, res) {
+    contractPromise.then(function (contract) {
+      contract.reset(parseInt(req.body.amount), function (err, data) {
+        if (err) return res.send(err, 500)
+        res.sendStatus(200)
+      })
     })
   }
 
@@ -105,6 +142,7 @@ module.exports = function () {
   return {
     create: create,
     getAll: getAll,
-    manageBank: manageBank
+    manageBank: manageBank,
+    redeem: redeem,
   }
 }

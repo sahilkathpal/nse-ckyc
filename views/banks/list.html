@@ -23,14 +23,18 @@
                   <tr>
                     <th>NAME</th>
                     <th>BRANCH</th>
-                    <th>*</th>
+                    <th>EMAIL</th>
+                    <th>MANAGE</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                  <tr ng-repeat="bank in banks">
+                    <td>{{bank.name}}</td>
+                    <td>{{bank.branch}}</td>
+                    <td>{{bank.email}}</td>
+                    <td>
+                      <a href="/banks/{{bank._id}}">manage</a>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -74,7 +78,7 @@
           return banks;
         }
         function fail (err) {
-          toastr.err('Something went wrong');
+          toastr.error('Something went wrong');
           console.log(err);
         }
       }]);

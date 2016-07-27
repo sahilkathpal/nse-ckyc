@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var routes = require('./routes/index');
+var routes = require('./routes/index')(passport);
 var users = require('./routes/users');
 var auth = require('./routes/auth')();
 var banks = require('./routes/banks')();

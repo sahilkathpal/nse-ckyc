@@ -66,9 +66,29 @@
         $scope.option = 'ckyc';
         $scope.ckyc = '<%= ckyc %>';
         $scope.ckycMissing = false;
+        $scope.data = {};
+        $scope.updateCustomer = updateCustomer;
+
+        function updateCustomer (key) {
+          if (! $scope.ckyc) {
+            alert('Please enter the ckyc id of the customer');
+            return;
+          }
+          if (! $scope.data[key]) {
+            alert('Please enter a valid value for: ' + key);
+            return;
+          }
+          var obj = {}; obj[key] = $scope.data[key];
+          obj.ckyc = $scope.ckyc;
+          $http.put('/customers/update', obj)
+            .then(function (data) {
+              $scope.data[key] = '';
+              toastr.success('Customer record updated');
+            }, fail);
+        }
 
         function fail (err) {
-          toastr.err('Something went wrong');
+          toastr.error('Something went wrong');
           console.log(err);
         }
       }]);
