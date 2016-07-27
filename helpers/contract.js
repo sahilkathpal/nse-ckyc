@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require('../models/User');
 module.exports = function () {
   var erisdbURL = "http://localhost:1337/rpc";
   return User.findOne({role: 9})
