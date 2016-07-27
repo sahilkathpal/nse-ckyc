@@ -20,7 +20,7 @@ module.exports = {
 
       for (; i < tmp_len; i += 1) {
           c = tmp.charCodeAt(i);
-          str += d2h(c);
+          str += this.d2h(c);
       }
       for (; 64-str.length>0;) {
         str=str+"0";
