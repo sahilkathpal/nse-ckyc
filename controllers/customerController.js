@@ -45,6 +45,7 @@ module.exports = function () {
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
           });
+          console.log(result);
           return res.send(result);
         })
       }
