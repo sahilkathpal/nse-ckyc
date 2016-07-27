@@ -8,7 +8,7 @@ module.exports = function (passport, LocalStrategy) {
   },
   function(req, username, password, done) {
     // check in mongo if a user with username exists or not
-    User.findOne({ 'username' :  username },
+    User.findOne({ 'email' :  req.body.email },
       function(err, user) {
         // In case of any error, return using the done method
         if (err)
@@ -18,7 +18,7 @@ module.exports = function (passport, LocalStrategy) {
           return done('User Not Found', false);
         }
         // User exists but wrong password, log the error
-        if (!isValidPassword(user, password)){
+        if (!isValidPassword(user, req.body.password)){
           return done("Invalid Password", false);
         }
         // User and password both match, return user from
