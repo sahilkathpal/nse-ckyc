@@ -68,7 +68,7 @@ module.exports = function () {
           });
         });
         return res.sendStatus(200);
-      }));
+      });
     });
   }
 
