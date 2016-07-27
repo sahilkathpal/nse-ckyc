@@ -1,45 +1,45 @@
-<form ng-submit="personalDetailsSave(o.personalDetails)" ng-show="option == 'ckyc'" name="personalDetailsFrm" class="form" novalidate>
+<form ng-submit="query()" ng-show="option == 'ckyc'" name="personalDetailsFrm" class="form" novalidate>
   <div class="col-md-12">
     <!-- <label>Query</label> -->
     <div class="input-group">
-      <input required ng-model="o.personalDetails.account_no" type="text" class="form-control" placeholder="Type cKYC no here">
-      <span ng-click="fetchInfo(o.personalDetails.account_no)" class="input-group-addon cur"><i class="fa fa-check"></i></span>
+      <input required ng-model="val" type="text" class="form-control" placeholder="Type cKYC no here">
+      <span ng-click="query()" class="input-group-addon cur"><i class="fa fa-check"></i></span>
     </div>
     <br>
   </div>
 
 </form>
 
-<form ng-submit="personalDetailsSave(o.personalDetails)" ng-show="option == 'pan'" name="personalDetailsFrm" class="form" novalidate>
+<form ng-submit="query()" ng-show="option == 'pan'" name="personalDetailsFrm" class="form" novalidate>
   <div class="col-md-12">
     <!-- <label>Query</label> -->
     <div class="input-group">
-      <input required ng-model="o.personalDetails.account_no" type="text" class="form-control" placeholder="Type PAN no here">
-      <span ng-click="fetchInfo(o.personalDetails.account_no)" class="input-group-addon cur"><i class="fa fa-check"></i></span>
+      <input required ng-model="val" type="text" class="form-control" placeholder="Type PAN no here">
+      <span ng-click="query()" class="input-group-addon cur"><i class="fa fa-check"></i></span>
     </div>
     <br>
   </div>
 
 </form>
 
-<form ng-submit="personalDetailsSave(o.personalDetails)" ng-show="option == 'aadhar'" name="personalDetailsFrm" class="form" novalidate>
+<form ng-submit="query()" ng-show="option == 'aadhar'" name="personalDetailsFrm" class="form" novalidate>
   <div class="col-md-12">
     <!-- <label>Query</label> -->
     <div class="input-group">
-      <input required ng-model="o.personalDetails.account_no" type="text" class="form-control" placeholder="Type Aadhar here">
-      <span ng-click="fetchInfo(o.personalDetails.account_no)" class="input-group-addon cur"><i class="fa fa-check"></i></span>
+      <input required ng-model="val" type="text" class="form-control" placeholder="Type Aadhar here">
+      <span ng-click="query()" class="input-group-addon cur"><i class="fa fa-check"></i></span>
     </div>
     <br>
   </div>
 
 </form>
 
-<form ng-submit="personalDetailsSave(o.personalDetails)" ng-show="option == 'passport'" name="personalDetailsFrm" class="form" novalidate>
+<form ng-submit="query()" ng-show="option == 'passport'" name="personalDetailsFrm" class="form" novalidate>
   <div class="col-md-12">
     <!-- <label>Query</label> -->
     <div class="input-group">
-      <input required ng-model="o.personalDetails.account_no" type="text" class="form-control" placeholder="Type passport no here">
-      <span ng-click="fetchInfo(o.personalDetails.account_no)" class="input-group-addon cur"><i class="fa fa-check"></i></span>
+      <input required ng-model="val" type="text" class="form-control" placeholder="Type passport no here">
+      <span ng-click="query()" class="input-group-addon cur"><i class="fa fa-check"></i></span>
     </div>
     <br>
   </div>
