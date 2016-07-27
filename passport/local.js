@@ -29,7 +29,9 @@ module.exports = function (passport, LocalStrategy) {
   }));
 
   function isValidPassword(user, password) {
-    return bCrypt.compareSync(password, user.password);
+    var result =  bCrypt.compareSync(password, user.password);
+    console.log(result);
+    return result;
   }
 
   passport.serializeUser(function(user, done) {
