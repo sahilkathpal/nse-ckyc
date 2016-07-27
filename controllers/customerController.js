@@ -7,10 +7,12 @@ console.log(contractPromise);
 var _ = require('lodash');
 module.exports = function () {
   function getCustomer(req, res) {
+    console.log(req.body);
     contractPromise.then(function (contract) {
       console.log("In contract");
+      console.log(req.body.value);
       var value = hex.str2hex(req.body.value);
-
+      console.log(value);
       if(req.body.key == "ckyc") {
         console.log("In ckyc");
         contract.findByCkycId(value, function (error, customerData) {
