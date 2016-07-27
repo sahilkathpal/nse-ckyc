@@ -46,7 +46,9 @@ module.exports = function () {
       }
 
       if(req.body.key == "pan") {
+        console.log("in pan",value);
         contract.findByPan(value, function (error, customerData) {
+          console.log("in find");
           if(error) res.send(error, 500);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
