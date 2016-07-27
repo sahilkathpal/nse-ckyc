@@ -4,6 +4,7 @@ var erisC = require('eris-contracts');
 var hex = require('../helpers/hex');
 var Hashids = require('hashids');
 var hashids = new Hashids("this is my salt", 8, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
+var contractPromise = require("../helpers/contract")();
 module.exports = function () {
   function getCustomer(req, res) {
     // var accountData = req.user.
