@@ -5,9 +5,9 @@ module.exports = function () {
     User.findOne({role: 9}, function (err, nse) {
       if (err) return reject(err);
       var accountData = {address: nse.address, pubKey: nse.pub_key, privKey: nse.priv_key};
-      var contractData = require('../../.eris/apps/nse-ckyc/epm.json');
+      var contractData = require('../../.eris/apps/ckyc_v1/epm.json');
       var kycContractAddress = contractData["deployV1"];
-      var kycAbi = JSON.parse(fs.readFileSync("../../.eris/apps/nse-ckyc/abi/" + kycContractAddress));
+      var kycAbi = JSON.parse(fs.readFileSync("../../.eris/apps/ckyc_v1/abi/" + kycContractAddress));
       var contractsManager = erisC.newContractManagerDev(erisdbURL, accountData);
       var contract = contractsManager.newContractFactory(kycAbi).at(kycContractAddress);
       resolve(contract);
