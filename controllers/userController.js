@@ -28,26 +28,12 @@ module.exports = function () {
         }
         obj.accounts().genPrivAccount({}, function (error, keyPair) {
           var accountData = keyPair;
-          // User.findOne({email: newUser.email})
-          // .then(function (newBank) {
-          //   newBank.address = accountData.address;
-          //   newBank.pub_key = accountData.pub_key[1];
-          //   newBank.priv_key = accountData.priv_key[1];
-          //   newBank.save(function(err) {
-          //     if (err){
-          //       console.log('Error in Saving user: '+err);
-          //       throw err;
-          //     }
-          //     console.log('User Registration succesful');
-          //   });
-          // })
           User.findOne({role:9})
           .then(function (nse) {
             var myKey = nse.priv_key;
             var myAddress = nse.address;
             var newKey = accountData.priv_key[1];
             var newAddress = accountData.address;
-            //return res.send(accountData);
             obj.txs().send(myKey, newAddress, 100, {}, function (error, result) {
               if (error) {
                 console.log(error);

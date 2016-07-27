@@ -101,9 +101,10 @@
             .then(function (data) {
               $scope.user = {
                 name: data.data[0],
-                pan: data.data[1],
+                pan: data.data[3],
                 aadhar: data.data[2],
-                passport: data.data[3]
+                passport: data.data[1],
+                ckyc: data.data[4]
               }
             }, fail);
         }
