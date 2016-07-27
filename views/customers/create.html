@@ -85,7 +85,7 @@
             if (val) arr.push(obj);
             return arr;
           }, []);
-          console.log(customerDatas); return;
+          // console.log(customerDatas); return;
           $http.post('/customers', customerDatas)
             .then(function (data) {
               toastr.success('Customer is added');
