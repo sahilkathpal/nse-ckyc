@@ -3,6 +3,7 @@ var erisdb = require('eris-db');
 var erisC = require('eris-contracts');
 var hex = require('../helpers/hex');
 var contractPromise = require('../helpers/contract')();
+console.log(contractPromise);
 var _ = require('lodash');
 module.exports = function () {
   function getCustomer(req, res) {
@@ -54,6 +55,7 @@ module.exports = function () {
   }
 
   function createCustomer(req, res) {
+    console.log("In createCustomer");
     contractPromise.then(function (contract) {
       console.log("In contract");
       var obj = req.body;
