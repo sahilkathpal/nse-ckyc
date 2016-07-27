@@ -63,7 +63,6 @@ module.exports = function () {
   function createCustomer(req, res) {
     contractPromise.then(function (contract) {
       var obj = req.body;
-
       contract.addCustomer(hex.str2hex('ckyc'), hex.str2hex(hashids.encode(Date.now())), function (error) {
         if(error) return res.send(error, 500);
         console.log("In add");
