@@ -1,5 +1,6 @@
 var User = require('../models/User');
 var fs = require('fs');
+var erisC = require("eris-contracts");
 module.exports = function () {
   var erisdbURL = "http://localhost:1337/rpc";
   var promise = new Promise (function (resolve, reject) {
