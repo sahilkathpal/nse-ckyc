@@ -8,10 +8,13 @@ var _ = require('lodash');
 module.exports = function () {
   function getCustomer(req, res) {
     contractPromise.then(function (contract) {
+      console.log("In contract");
       var value = hex.str2hex(req.body.value);
 
       if(req.body.key == "ckyc") {
+        console.log("In ckyc");
         contract.findByCkycId(value, function (error, customerData) {
+          console.log("In findByCkycId");
           if(error) res.send(error, 500);
           customerData.forEach(function (customerDatum) {
             customerDatum = hex.hex2str(customerDatum);
@@ -61,6 +64,7 @@ module.exports = function () {
       var obj = req.body;
       console.log(contract);
       contract.addCustomer(hex.str2hex(obj[0]['key'], str2hex(obj[0]['value']), function (error) {
+        if(error) console.log(error);
         console.log("In add Customer");
         if(error) return res.send(error, 500);
         obj.slice(1).forEach(function (entry) {
