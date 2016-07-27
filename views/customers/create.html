@@ -17,7 +17,7 @@
           <br>
           <div class="box-body">
 
-            <form ng-submit="addCutomer(customer)" name="addCutomerFrm" class="form" novalidate>
+            <form ng-submit="addCutomer(customer)" name="addCustomerFrm" class="form" novalidate>
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control" name="name" ng-model="customer.name" required>
@@ -74,7 +74,7 @@
         $scope.addCutomer = addCutomer;
 
         function addCutomer (customer) {
-          if ($scope.addCutomerFrm.$invalid) {
+          if ($scope.addCustomerFrm.$invalid) {
             return;
           }
           var customerDatas = _.reduce(customer, function (arr, val, key) {

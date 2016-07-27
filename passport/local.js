@@ -1,6 +1,7 @@
 module.exports = function (passport, LocalStrategy) {
 
   var User = require('../models/User.js');
+  var bCrypt = require('bCrypt');
 
   passport.use('login', new LocalStrategy({
     passReqToCallback : true
@@ -14,13 +15,11 @@ module.exports = function (passport, LocalStrategy) {
           return done(err);
         // Username does not exist, log error & redirect back
         if (!user){
-          console.log('User Not Found with username '+username);
-          return done(null, false);
+          return done('User Not Found', false);
         }
         // User exists but wrong password, log the error
         if (!isValidPassword(user, password)){
-          console.log('Invalid Password');
-          return done(null, false);
+          return done("Invalid Password", false);
         }
         // User and password both match, return user from
         // done method which will be treated like success
@@ -28,6 +27,10 @@ module.exports = function (passport, LocalStrategy) {
       }
     );
   }));
+
+  function isValidPassword(user, password) {
+    return bCrypt.compareSync(user.password, password);
+  }
 
   passport.serializeUser(function(user, done) {
     done(null, user._id);

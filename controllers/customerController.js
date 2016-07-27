@@ -7,8 +7,12 @@ var hashids = new Hashids("this is my salt", 8, "abcdefghijklmnopqrstuvwxyzABCDE
 var contractPromise = require("../helpers/contract")();
 module.exports = function () {
   function getCustomer(req, res) {
-    // var accountData = req.user.
-    var contractPromise = require('../helpers/contract')();
+    var accountData = {
+      address: req.user.address,
+      pubKey:  req.user.pub_key,
+      privKey:  req.user.priv_key
+    }
+    var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
       var value = hex.str2hex(req.body.value);
 
@@ -46,9 +50,7 @@ module.exports = function () {
       }
 
       if(req.body.key == "pan") {
-        console.log("in pan",value);
         contract.findByPan(value, function (error, customerData) {
-          console.log("in find");
           if(error) res.send(error, 500);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
@@ -68,9 +70,7 @@ module.exports = function () {
       var hash = hashids.encode(Date.now());
       contract.addCustomer(hex.str2hex('ckyc'), hex.str2hex(hash), function (error) {
         if(error) return res.send(error, 500);
-        console.log("In add");
         obj.forEach(function (entry) {
-          console.log("In update");
           contract.updateCustomer(hex.str2hex(hash), hex.str2hex(entry.key), hex.str2hex(entry.value), function (error) {
           });
         });
