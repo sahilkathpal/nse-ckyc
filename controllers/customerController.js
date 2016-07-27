@@ -57,8 +57,9 @@ module.exports = function () {
     contractPromise.then(function (contract) {
       var obj = req.body;
       console.log("In contract");
+      console.log(contract);
       console.log(obj[0]['key']+"     "+obj[0]['value']);
-      contract.addCustomer(hex.str2hex(obj[0]['key'], hex.str2hex(obj[0]['value']), function (error) {
+      contract.addCustomer(hex.str2hex(obj[0]['key']), hex.str2hex(obj[0]['value']), function (error) {
         if(error) return res.send(error, 500);
         console.log("In add");
         obj.slice(1).forEach(function (entry) {
