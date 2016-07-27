@@ -30,8 +30,8 @@ module.exports = function () {
           var accountData = keyPair;
           User.findOne({role:9})
           .then(function (nse) {
-            var myKey = nse.priv_key;
-            var myAddress = nse.address;
+            var myKey = req.user.priv_key;
+            var myAddress = req.user.address;
             var newKey = accountData.priv_key[1];
             var newAddress = accountData.address;
             obj.txs().send(myKey, newAddress, 100, {}, function (error, result) {
