@@ -8,8 +8,10 @@ module.exports = function (passport, LocalStrategy) {
   },
   function(req, username, password, done) {
     // check in mongo if a user with username exists or not
+    console.log(req.body, username, password);
     User.findOne({ 'email' :  req.body.email },
       function(err, user) {
+        console.log(err, user);
         // In case of any error, return using the done method
         if (err)
           return done(err);
