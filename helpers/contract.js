@@ -8,7 +8,7 @@ module.exports = function () {
       var accountData = {address: nse.address, pubKey: nse.pub_key, privKey: nse.priv_key};
       var contractData = require('../../.eris/apps/ckyc_v1/epm.json');
       var kycContractAddress = contractData["deployV1"];
-      var kycAbi = JSON.parse(fs.readFileSync("../../.eris/apps/ckyc_v1/abi/" + kycContractAddress));
+      var kycAbi = JSON.parse(fs.readFileSync("../.eris/apps/ckyc_v1/abi/" + kycContractAddress));
       var contractsManager = erisC.newContractManagerDev(erisdbURL, accountData);
       var contract = contractsManager.newContractFactory(kycAbi).at(kycContractAddress);
       resolve(contract);
