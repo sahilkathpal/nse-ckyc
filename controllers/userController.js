@@ -92,7 +92,7 @@ module.exports = function () {
     .then(function (bank) {
       // if (err) return res.send(err, 500)
       contractPromise.then(function (contract) {
-        contract.getMyCount(function (err, count) {
+        contract.getMyCount(bank.address, function (err, count) {
           if (err) return res.send(err, 500)
           return res.render('banks/manage', {bank: bank, count: count.toNumber()})
         })
@@ -131,7 +131,7 @@ module.exports = function () {
     };
     var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
-      contract.reset(parseInt(req.body.amount), function (err, data) {
+      contract.reset(parseInt(req.body.address, req.body.amount), function (err, data) {
         if (err) return res.send(err, 500)
         res.sendStatus(200)
       })
