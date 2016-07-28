@@ -2,9 +2,10 @@ var User = require('../models/User.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 var erisdb = require('eris-db');
 var contractPromise = require('../helpers/contract')();
+var bCrypt = require('bcrypt');
+var hex = require('../helpers/hex');
 
 module.exports = function () {
- var bCrypt = require('bcrypt');
 
 
   function create(req, res) {
@@ -14,7 +15,7 @@ module.exports = function () {
       if (err){
         console.log('Error in SignUp: '+err);
         return res.sendStatus(500);
-      } 
+      }
       // already exists
       if (user) {
         console.log('User already exists');
@@ -34,12 +35,12 @@ module.exports = function () {
             var myAddress = req.user.address;
             var newKey = accountData.priv_key[1];
             var newAddress = accountData.address;
-            obj.txs().send(myKey, newAddress, 20, {}, function (error, result) {
+            obj.txs().send(myKey, newAddress, 1000, {}, function (error, result) {
               if (error) {
                 console.log(error);
                 return;
               }
-              obj.txs().send(newKey, myAddress, 15, {}, function (error, result1) {
+              obj.txs().send(newKey, myAddress, 1, {}, function (error, result1) {
                 if(error) {
                   console.log(error);
                   return;
@@ -124,6 +125,65 @@ module.exports = function () {
     })
   }
 
+  function fetchForBank (req, res) {
+    var accountData = {
+      address: req.body.address,
+      pubKey: req.body.pub_key,
+      privKeyL req.body.priv_key
+    }
+    var contractPromise = require('../helpers/contract')(accountData);
+    contractPromise.then(function (contract) {
+      var value = hex.str2hex(req.body.value);
+
+      if(req.body.key == "ckyc") {
+        contract.findByCkycId(value, function (error, customerData) {
+          if(error) res.send(error, 500);
+          var result = customerData.map(function (customerDatum) {
+             return hex.hex2str(customerDatum);
+          });
+          if(result[4] == "") return res.sendStatus(409);
+          return res.send(result);
+        })
+      }
+
+      if(req.body.key == "passport") {
+        contract.findByPassport(value, function (error, customerData) {
+          if(error) res.send(error, 500);
+          var result = customerData.map(function (customerDatum) {
+            return hex.hex2str(customerDatum);
+          });
+          if(result[4] == "") return res.sendStatus(409);
+          return res.send(result);
+        })
+      }
+
+      if(req.body.key == "aadhar") {
+        contract.findByAadhar(value, function (error, customerData) {
+          if(error) res.send(error, 500);
+          var result = customerData.map(function (customerDatum) {
+            return hex.hex2str(customerDatum);
+          });
+          if(result[4] == "") return res.sendStatus(409);
+          return res.send(result);
+        })
+      }
+
+      if(req.body.key == "pan") {
+        contract.findByPan(value, function (error, customerData) {
+          if(error) res.send(error, 500);
+          var result = customerData.map(function (customerDatum) {
+            return hex.hex2str(customerDatum);
+          });
+          if(result[4] == "") return res.sendStatus(409);
+          return res.send(result);
+        })
+      }
+
+    });
+
+
+  }
+
   function createHash(password){
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
   }
@@ -132,6 +192,7 @@ module.exports = function () {
     create: create,
     getAll: getAll,
     manageBank: manageBank,
-    redeem: redeem,
+    fetchForBank: fetchForBank,
+    redeem: redeem
   }
 }
