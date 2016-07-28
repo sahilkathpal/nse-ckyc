@@ -1,5 +1,7 @@
 module.exports = function () {
-  const router = require('express').Router()
+  var express = require('express');
+  var router = express.Router();
+
   var user = require('../controllers/userController')();
 
   router.post('/customers/fetch', user.fetchForBank);
