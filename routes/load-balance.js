@@ -4,5 +4,5 @@ module.exports = function () {
 
   router.post('/customers/fetch', user.fetchForBank);
 
-  return router
+  return router;
 }

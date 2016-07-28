@@ -142,6 +142,7 @@ module.exports = function () {
     }
     var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
+      console.log("in contract");
       var value = hex.str2hex(req.body.value);
 
       if(req.body.key == "ckyc") {
@@ -178,7 +179,9 @@ module.exports = function () {
       }
 
       if(req.body.key == "pan") {
+        console.log("in pan");
         contract.findByPan(value, function (error, customerData) {
+          console.log("in find");
           if(error) res.send(error, 500);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
