@@ -81,8 +81,8 @@ module.exports = function () {
   }
 
   function manageBank (req, res) {
-    User.findOne({_id: new ObjectId(req.params.resourceId)})
-    .select('email name branch address')
+    User.findOne({_id: new ObjectId(req.params.resourceId)}).exec()
+    // .select('email name branch address')
     .then(function (err, bank) {
       if (err) return res.send(err, 500)
       // contractPromise.then(function (contract) {
@@ -92,7 +92,7 @@ module.exports = function () {
       //     return res.render('banks/manage', {bank: bank})
       //   })
       // })
-      console.log('inside manageBank');
+      console.log('inside manageBank', bank);
       return res.render('banks/manage', {bank: bank})
     })
 
