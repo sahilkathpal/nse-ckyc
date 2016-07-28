@@ -84,7 +84,7 @@ module.exports = function () {
     User.findOne({_id: new ObjectId(req.params.bankId)}).exec()
     // .select('email name branch address').exec()
     .then(function (bank) {
-      if (err) return res.send(err, 500)
+      // if (err) return res.send(err, 500)
       contractPromise.then(function (contract) {
         console.log('got contract', contract);
         contract.getMyCount(function (err, count) {
@@ -95,6 +95,8 @@ module.exports = function () {
         })
       })
       // return res.render('banks/manage', {bank: bank})
+    }, function () {
+
     })
     .catch(function (err) {
       console.log(err);
