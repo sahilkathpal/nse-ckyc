@@ -95,7 +95,7 @@ module.exports = function () {
       contractPromise.then(function (contract) {
         contract.getMyCount(bank.address, function (err, count) {
           if (err) return res.send(err, 500)
-          return res.render('banks/manage', {bank: bank, count: count.toNumber(), user: user})
+          return res.render('banks/manage', {bank: bank, count: count.toNumber(), user: req.user})
         })
       })
     })
