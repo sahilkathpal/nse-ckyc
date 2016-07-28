@@ -68,7 +68,7 @@
             return;
           }
           // make http call
-          $http.post('/banks/' + bank._id + '/redeem', {amount: val})
+          $http.post('/banks/' + bank._id + '/redeem', {amount: val, address: $scopebank.address})
             .then(function (data) {
               bank.count -= val
             }, fail)
