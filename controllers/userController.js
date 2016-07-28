@@ -132,7 +132,7 @@ module.exports = function () {
     var accountData = {
       address: req.body.address,
       pubKey: req.body.pub_key,
-      privKeyL req.body.priv_key
+      privKey: req.body.priv_key
     }
     var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
