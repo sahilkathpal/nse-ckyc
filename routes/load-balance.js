@@ -1,5 +1,6 @@
 module.exports = function () {
-  var router = require('express').Router();
+  var express = require('express');
+  var router = express.Router();
 
   var user = require('../controllers/userController')();
 
