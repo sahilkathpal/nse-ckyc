@@ -32,7 +32,9 @@
                   <th>PAN</th>
                   <th>AADHAR</th>
                   <th>PASSPORT</th>
+                  {% if (user.role == 9) %}
                   <th>EDIT</th>
+                  {% endif %}
                 </tr>
               </thead>
               <tbody>
@@ -42,11 +44,13 @@
                   <td>{{user.pan}}</td>
                   <td>{{user.aadhar}}</td>
                   <td>{{user.passport}}</td>
+                  {% if (user.role == 9) %}
                   <td>
                     <a ng-href="/customers/update?ckyc={{user.ckyc}}">
                       <i class="fa fa-edit"></i>
                     </a>
                   </td>
+                  {% endif %}
                 </tr>
               </tbody>
             </table>
