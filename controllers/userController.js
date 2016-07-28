@@ -81,18 +81,22 @@ module.exports = function () {
   }
 
   function manageBank (req, res) {
-    User.findOne({_id: new ObjectId(req.params.bankId)})
-    .select('email name branch address')
+    User.findOne({_id: new ObjectId(req.params.bankId)}).exec()
+    // .select('email name branch address').exec()
     .then(function (bank) {
-      if (err) return res.send(err, 500)
+      // if (err) return res.send(err, 500)
       contractPromise.then(function (contract) {
         contract.getMyCount(function (err, count) {
+          console.log('inside getMyCount', err, count.toNumber());
           if (err) return res.send(err, 500)
           bank.count = count
           return res.render('banks/manage', {bank: bank})
         })
       })
-      // return res.render('banks/manage', {bank: bank})
+    })
+    .catch(function (err) {
+      console.log(err);
+      res.send(err);
     })
 
     // var bank;
