@@ -14,7 +14,7 @@ module.exports = function () {
       if (err){
         console.log('Error in SignUp: '+err);
         return res.sendStatus(500);
-      } 
+      }
       // already exists
       if (user) {
         console.log('User already exists');
@@ -81,7 +81,7 @@ module.exports = function () {
   }
 
   function manageBank (req, res) {
-    User.findOne({_id: new ObjectId(req.params.bankId)})
+    User.findOne({_id: new ObjectId(req.params.bankId)}).exec()
     .select('email name branch address')
     .then(function (bank) {
       if (err) return res.send(err, 500)
