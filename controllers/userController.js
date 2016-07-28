@@ -86,7 +86,6 @@ module.exports = function () {
     .then(function (bank) {
       // if (err) return res.send(err, 500)
       contractPromise.then(function (contract) {
-        console.log('got contract', contract);
         contract.getMyCount(function (err, count) {
           console.log('inside getMyCount', err, count.toNumber());
           if (err) return res.send(err, 500)
@@ -94,9 +93,6 @@ module.exports = function () {
           return res.render('banks/manage', {bank: bank})
         })
       })
-      // return res.render('banks/manage', {bank: bank})
-    }, function () {
-
     })
     .catch(function (err) {
       console.log(err);
