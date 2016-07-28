@@ -137,6 +137,7 @@ module.exports = function () {
   }
 
   function fetchForBank (req, res) {
+    console.log("in fetchForBank");
     var accountData = {
       address: req.body.address,
       pubKey: req.body.pub_key,
