@@ -1,7 +1,6 @@
 var User = require('../models/User.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 var erisdb = require('eris-db');
-var contractPromise = require('../helpers/contract')();
 var bCrypt = require('bcrypt');
 var hex = require('../helpers/hex');
 
