@@ -76,7 +76,7 @@ module.exports = function () {
     User.find({role: 1}).select("name branch email address")
     .then(function (banks) {
       console.log(banks);
-      return res.render('banks/list', {banks: banks});
+      return res.render('banks/list', {banks: banks, user: req.user});
     });
   }
 
@@ -94,7 +94,7 @@ module.exports = function () {
       contractPromise.then(function (contract) {
         contract.getMyCount(bank.address, function (err, count) {
           if (err) return res.send(err, 500)
-          return res.render('banks/manage', {bank: bank, count: count.toNumber()})
+          return res.render('banks/manage', {bank: bank, count: count.toNumber(), user: user})
         })
       })
     })

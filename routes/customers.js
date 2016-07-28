@@ -6,13 +6,13 @@ module.exports = function () {
   var customer = require("../controllers/customerController")();
 
   function queryFrm (req, res, next) {
-    return res.render('customers/query');
+    return res.render('customers/query', {user: req.user});
   }
   function createFrm (req, res, next) {
-    return res.render('customers/create');
+    return res.render('customers/create', {user: req.user});
   }
   function updateFrm (req, res, next) {
-    return res.render('customers/update', {ckyc: req.query.ckyc});
+    return res.render('customers/update', {ckyc: req.query.ckyc, user: req.user});
   }
 
   router.get('/query', auth.authOnly, queryFrm);
