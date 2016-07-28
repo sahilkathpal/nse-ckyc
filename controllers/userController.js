@@ -96,6 +96,10 @@ module.exports = function () {
       })
       // return res.render('banks/manage', {bank: bank})
     })
+    .catch(function (err) {
+      console.log(err);
+      res.send(err);
+    })
 
     // var bank;
     // User.findOne({_id: new ObjectId(req.params.resourceId)}).exec()
