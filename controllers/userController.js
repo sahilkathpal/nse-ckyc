@@ -208,8 +208,7 @@ module.exports = function () {
     var seeds = ["13.75.94.127", "13.75.89.110"];
     superAgent.get('http://'+seeds[0]+":1337/net_info")
     .then(function (peers) {
-      peers.result.
-      resolve(ip);
+      return peers.result[1].peers[0].node_info.host;
     })
     .catch(function (error) {
       seeds = seeds.splice(1);
