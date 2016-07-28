@@ -65,6 +65,12 @@ module.exports = function () {
   }
 
   function createCustomer(req, res) {
+    var accountData = {
+      address: req.user.address,
+      pubKey:  req.user.pub_key,
+      privKey:  req.user.priv_key
+    }
+    var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
       var obj = req.body;
       var hash = hashids.encode(Date.now());
@@ -80,6 +86,12 @@ module.exports = function () {
   }
 
   function updateCustomer(req, res) {
+    var accountData = {
+      address: req.user.address,
+      pubKey:  req.user.pub_key,
+      privKey:  req.user.priv_key
+    }
+    var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
       contract.updateCustomer(hex.str2hex(req.body.ckyc), hex.str2hex(req.body.key), hex.str2hex(req.body.value), function (error) {
         if (error) return res.send(error, 500);
