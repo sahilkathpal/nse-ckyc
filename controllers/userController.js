@@ -206,13 +206,13 @@ module.exports = function () {
   function loadBalance() {
     var validators = ["13.75.92.175","52.175.24.134","52.175.33.133","52.175.25.248"];
     var seeds = ["13.75.94.127", "13.75.89.110"];
-    superAgent.get('http://'+seeds[0]+":1337/net_info")
+    superAgent.get('http://'+seeds[0]+":46657/net_info")
     .then(function (peers) {
       return peers.result[1].peers[0].node_info.host;
     })
     .catch(function (error) {
       seeds = seeds.splice(1);
-      superAgent.get('http://'+seeds[1]+":1337/net_info")
+      superAgent.get('http://'+seeds[1]+":46657/net_info")
       .then(function (peers) {
         return peers.result[1].peers[0].node_info.host;
       })
