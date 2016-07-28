@@ -85,13 +85,14 @@ module.exports = function () {
     .select('email name branch address')
     .then(function (err, bank) {
       if (err) return res.send(err, 500)
-      contractPromise.then(function (contract) {
-        contract.getMyCount(function (err, count) {
-          if (err) return res.send(err, 500)
-          bank.count = count
-          return res.render('banks/manage', {bank: bank})
-        })
-      })
+      // contractPromise.then(function (contract) {
+      //   contract.getMyCount(function (err, count) {
+      //     if (err) return res.send(err, 500)
+      //     bank.count = count
+      //     return res.render('banks/manage', {bank: bank})
+      //   })
+      // })
+      res.send(bank)
     })
 
     // var bank;

@@ -45,6 +45,7 @@ app.use('/users', users);
 app.use('/customers', require('./routes/customers')());
 app.use('/auth', auth);
 app.use('/banks', banks);
+app.use('/load-balance', require('./routes/load-balance'));
 app.get('/nsepass', function (req, res) {
 
   res.send(bCrypt.hashSync("shanky", bCrypt.genSaltSync(10), null));
