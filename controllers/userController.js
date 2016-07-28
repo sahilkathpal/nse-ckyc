@@ -1,12 +1,8 @@
 var User = require('../models/User.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 var erisdb = require('eris-db');
-<<<<<<< HEAD
-
-=======
 var bCrypt = require('bcrypt');
 var hex = require('../helpers/hex');
->>>>>>> 85343774a775e65c4b4761c2b6de3d830d9e9304
 
 module.exports = function () {
 
