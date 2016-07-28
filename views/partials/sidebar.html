@@ -23,11 +23,15 @@
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
 
+      {% if (user.role == 9) %}
       <li id="nav-banks-create"><a href="/banks/create"><i class="fa fa-plus"></i> <span>Add bank / branch</span></a></li>
       <li id="nav-banks-list"><a href="/banks"><i class="fa fa-bank"></i> <span>List banks</span></a></li>
+      {% endif %}
       <li id="nav-customers-query"><a href="/customers/query"><i class="fa fa-search"></i> <span>Query customer data</span></a></li>
+      {% if (user.role == 9) %}
       <li id="nav-customers-create"><a href="/customers/create"><i class="fa fa-user"></i> <span>Add customer</span></a></li>
       <li id="nav-customers-update"><a href="/customers/update"><i class="fa fa-edit"></i> <span>Update customer data</span></a></li>
+      {% endif %}
       <li><a href="/logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
 
       <!-- <li id="nav-users"><a href="#"><i class="fa fa-users"></i> <span>Friends</span></a></li> -->
