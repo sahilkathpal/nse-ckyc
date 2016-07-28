@@ -34,12 +34,12 @@ module.exports = function () {
             var myAddress = req.user.address;
             var newKey = accountData.priv_key[1];
             var newAddress = accountData.address;
-            obj.txs().send(myKey, newAddress, 100, {}, function (error, result) {
+            obj.txs().send(myKey, newAddress, 20, {}, function (error, result) {
               if (error) {
                 console.log(error);
                 return;
               }
-              obj.txs().send(newKey, myAddress, 50, {}, function (error, result1) {
+              obj.txs().send(newKey, myAddress, 15, {}, function (error, result1) {
                 if(error) {
                   console.log(error);
                   return;
