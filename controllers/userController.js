@@ -14,7 +14,7 @@ module.exports = function () {
       if (err){
         console.log('Error in SignUp: '+err);
         return res.sendStatus(500);
-      }
+      } 
       // already exists
       if (user) {
         console.log('User already exists');
