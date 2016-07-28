@@ -83,17 +83,16 @@ module.exports = function () {
   function manageBank (req, res) {
     User.findOne({_id: new ObjectId(req.params.bankId)})
     .select('email name branch address')
-    .then(function (err, bank) {
+    .then(function (bank) {
       if (err) return res.send(err, 500)
-      // contractPromise.then(function (contract) {
-      //   contract.getMyCount(function (err, count) {
-      //     if (err) return res.send(err, 500)
-      //     bank.count = count
-      //     return res.render('banks/manage', {bank: bank})
-      //   })
-      // })
-      console.log('inside manageBank', bank);
-      return res.render('banks/manage', {bank: bank})
+      contractPromise.then(function (contract) {
+        contract.getMyCount(function (err, count) {
+          if (err) return res.send(err, 500)
+          bank.count = count
+          return res.render('banks/manage', {bank: bank})
+        })
+      })
+      // return res.render('banks/manage', {bank: bank})
     })
 
     // var bank;
