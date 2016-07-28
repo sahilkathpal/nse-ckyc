@@ -86,7 +86,9 @@ module.exports = function () {
     .then(function (bank) {
       if (err) return res.send(err, 500)
       contractPromise.then(function (contract) {
+        console.log('got contract', contract);
         contract.getMyCount(function (err, count) {
+          console.log('inside getMyCount', err, count.toNumber());
           if (err) return res.send(err, 500)
           bank.count = count
           return res.render('banks/manage', {bank: bank})
