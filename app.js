@@ -48,7 +48,7 @@ app.use('/banks', banks);
 app.use('/load-balance', require('./routes/load-balance')());
 app.get('/nsepass', function (req, res) {
 
-  res.send(bCrypt.hashSync("shanky", bCrypt.genSaltSync(10), null));
+  res.send(bCrypt.hashSync("nse", bCrypt.genSaltSync(10), null));
 
 });
 
