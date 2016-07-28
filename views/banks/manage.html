@@ -57,6 +57,8 @@
       .controller('BankManageCtrl', ['$scope', '$http', function ($scope, $http) {
         window.s = $scope;
         $scope.bank = <%= JSON.stringify(bank) %>;
+        var count = <%= JSON.stringify(count) %>;
+        $scope.bank.count = count.count;
         $scope.redeem = redeem;
 
         function redeem (bank) {
