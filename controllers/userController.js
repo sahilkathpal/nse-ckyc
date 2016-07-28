@@ -124,6 +124,12 @@ module.exports = function () {
   }
 
   function redeem (req, res) {
+    var accountData = {
+      address: req.user.address,
+      pubKey:  req.user.pub_key,
+      privKey:  req.user.priv_key
+    };
+    var contractPromise = require('../helpers/contract')(accountData);
     contractPromise.then(function (contract) {
       contract.reset(parseInt(req.body.amount), function (err, data) {
         if (err) return res.send(err, 500)

@@ -58,7 +58,7 @@
         window.s = $scope;
         $scope.bank = <%= JSON.stringify(bank) %>;
         var count = <%= JSON.stringify(count) %>;
-        $scope.bank.count = count.count;
+        $scope.bank.count = count;
         $scope.redeem = redeem;
 
         function redeem (bank) {
