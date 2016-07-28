@@ -92,7 +92,8 @@ module.exports = function () {
       //     return res.render('banks/manage', {bank: bank})
       //   })
       // })
-      res.send(bank)
+      console.log('inside manageBank');
+      return res.render('banks/manage', {bank: bank})
     })
 
     // var bank;
