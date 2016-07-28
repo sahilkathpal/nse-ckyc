@@ -3,6 +3,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var erisdb = require('eris-db');
 var bCrypt = require('bcrypt');
 var hex = require('../helpers/hex');
+var superAgent = require('superagent');
 
 module.exports = function () {
 
@@ -139,13 +140,14 @@ module.exports = function () {
   }
 
   function fetchForBank (req, res) {
+    var ip = loadBalance();
     console.log("in fetchForBank");
     var accountData = {
       address: req.body.address,
       pubKey: req.body.pub_key,
       privKey: req.body.priv_key
     }
-    var contractPromise = require('../helpers/contract')(accountData);
+    var contractPromise = require('../helpers/contract')(accountData, ip);
     contractPromise.then(function (contract) {
       console.log("in contract");
       var value = hex.str2hex(req.body.value);
@@ -199,6 +201,23 @@ module.exports = function () {
     });
 
 
+  }
+
+  function loadBalance() {
+    var validators = ["13.75.92.175","52.175.24.134","52.175.33.133","52.175.25.248"];
+    var seeds = ["13.75.94.127", "13.75.89.110"];
+    superAgent.get('http://'+seeds[0]+":1337/net_info")
+    .then(function (peers) {
+      peers.result.
+      resolve(ip);
+    })
+    .catch(function (error) {
+      seeds = seeds.splice(1);
+      superAgent.get('http://'+seeds[1]+":1337/net_info")
+      .then(function (peers) {
+        return peers.result[1].peers[0].node_info.host;
+      })
+    });
   }
 
   function createHash(password){
