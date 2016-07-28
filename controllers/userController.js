@@ -1,7 +1,7 @@
 var User = require('../models/User.js');
 var ObjectId = require('mongoose').Types.ObjectId;
 var erisdb = require('eris-db');
-var contractPromise = require('../helpers/contract')();
+
 
 module.exports = function () {
  var bCrypt = require('bcrypt');
@@ -81,6 +81,12 @@ module.exports = function () {
   }
 
   function manageBank (req, res) {
+    var accountData = {
+      address: req.user.address,
+      pubKey:  req.user.pub_key,
+      privKey:  req.user.priv_key
+    };
+    var contractPromise = require('../helpers/contract')(accountData);
     User.findOne({_id: new ObjectId(req.params.bankId)}).exec()
     // .select('email name branch address').exec()
     .then(function (bank) {
