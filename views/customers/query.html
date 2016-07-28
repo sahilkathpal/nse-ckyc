@@ -24,7 +24,7 @@
 
             {% include 'partials/query-forms.html' %}
 
-            <table ng-show="user" class="table table-hover">
+            <table ng-show="user && user.ckyc != ''" class="table table-hover">
               <thead>
                 <tr>
                   <th>CKYC</th>
@@ -54,7 +54,7 @@
                 </tr>
               </tbody>
             </table>
-
+            <h3 ng-show="user && user.ckyc == ''">User not found</h3>
           </div>
         </div>
       </div>
