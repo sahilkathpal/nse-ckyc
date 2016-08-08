@@ -24,7 +24,7 @@
 
             {% include 'partials/query-forms.html' %}
 
-            <table ng-show="user" class="table table-hover">
+            <table ng-show="user && user.ckyc != ''" class="table table-hover">
               <thead>
                 <tr>
                   <th>CKYC</th>
@@ -32,7 +32,9 @@
                   <th>PAN</th>
                   <th>AADHAR</th>
                   <th>PASSPORT</th>
+                  {% if (user.role == 9) %}
                   <th>EDIT</th>
+                  {% endif %}
                 </tr>
               </thead>
               <tbody>
@@ -42,15 +44,17 @@
                   <td>{{user.pan}}</td>
                   <td>{{user.aadhar}}</td>
                   <td>{{user.passport}}</td>
+                  {% if (user.role == 9) %}
                   <td>
                     <a ng-href="/customers/update?ckyc={{user.ckyc}}">
                       <i class="fa fa-edit"></i>
                     </a>
                   </td>
+                  {% endif %}
                 </tr>
               </tbody>
             </table>
-
+            <h3 ng-show="user && user.ckyc == ''">User not found</h3>
           </div>
         </div>
       </div>
