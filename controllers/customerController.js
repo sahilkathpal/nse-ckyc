@@ -55,6 +55,7 @@ module.exports = function () {
       if(req.body.key == "pan") {
         contract.findByPan(value, function (error, customerData) {
           if(error) res.send(error, 500);
+          if(customerData[4] == "0000000000000000000000000000000000000000000000000000000000000000")
             return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
