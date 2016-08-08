@@ -57,7 +57,7 @@ module.exports = function () {
           });
           console.log("result[4]: ");
           console.log(result[4]);
-          if(result[4]=="") return res.sendStatus(409);
+          if(result[4]==null) return res.sendStatus(409);
           return res.send(result);
         })
       }
