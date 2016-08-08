@@ -24,7 +24,7 @@
 
             {% include 'partials/query-forms.html' %}
             <h5 ng-show="missing">Sorry, none of the entries match your query.</h5>
-            <table ng-show="user && user.ckyc != ''" class="table table-hover">
+            <table ng-show="user && user.ckyc" class="table table-hover">
               <thead>
                 <tr>
                   <th>CKYC</th>
