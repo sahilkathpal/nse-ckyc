@@ -106,7 +106,6 @@
           $http.post('/customers/fetch', obj)
             .then(function (data) {
               $scope.user = {
-                missing: false,
                 name: data.data[0],
                 pan: data.data[3],
                 aadhar: data.data[2],
@@ -118,6 +117,7 @@
 
         function fail (err) {
           $scope.missing = true;
+          $scope.user = {};
           toastr.error('Not Found.');
           console.log(err);
         }
