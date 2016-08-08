@@ -38,7 +38,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr ng-if="user.missing">
+                  <td></td>
+                  <td>Sorry, your query did not match any existing entries.</td>
+                </tr>
+
+                <tr ng-if="! user.missing">
                   <td>{{user.ckyc}}</td>
                   <td>{{user.name}}</td>
                   <td>{{user.pan}}</td>
@@ -104,7 +109,12 @@
           // return;
           $http.post('/customers/fetch', obj)
             .then(function (data) {
+              if(data.data[4] == "") {
+                $scope.user.missing = true;
+                return;
+              }
               $scope.user = {
+                missing: false,
                 name: data.data[0],
                 pan: data.data[3],
                 aadhar: data.data[2],
