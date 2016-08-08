@@ -23,7 +23,7 @@
             </div>
 
             {% include 'partials/query-forms.html' %}
-
+            <h5 ng-show="user.missing">Sorry, none of the entries match your query.</h5>
             <table ng-show="user && user.ckyc != ''" class="table table-hover">
               <thead>
                 <tr>
@@ -38,12 +38,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-if="user.missing">
+                <tr>
                   <td></td>
                   <td>Sorry, your query did not match any existing entries.</td>
                 </tr>
 
-                <tr ng-if="! user.missing">
+                <tr>
                   <td>{{user.ckyc}}</td>
                   <td>{{user.name}}</td>
                   <td>{{user.pan}}</td>
