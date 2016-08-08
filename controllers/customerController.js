@@ -52,6 +52,7 @@ module.exports = function () {
       if(req.body.key == "pan") {
         contract.findByPan(value, function (error, customerData) {
           if(error) res.send(error, 500);
+          console.log(customerData[4]);
           if(customerData[4] == "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000")
             return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
