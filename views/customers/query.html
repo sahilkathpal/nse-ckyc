@@ -121,7 +121,7 @@
         }
 
         function fail (err) {
-          $scope.user.missing = true;
+          $scope.user = {missing: true};
           toastr.error('Not Found.');
           console.log(err);
         }
