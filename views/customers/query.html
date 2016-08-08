@@ -109,7 +109,6 @@
           // return;
           $http.post('/customers/fetch', obj)
             .then(function (data) {
-              if(data.status == 409) return $scope.user.missing = true;
               $scope.user = {
                 missing: false,
                 name: data.data[0],
@@ -122,6 +121,7 @@
         }
 
         function fail (err) {
+          $scope.user.missing = true;
           toastr.error('Not Found.');
           console.log(err);
         }
