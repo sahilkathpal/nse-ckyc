@@ -52,12 +52,11 @@ module.exports = function () {
       if(req.body.key == "pan") {
         contract.findByPan(value, function (error, customerData) {
           if(error) res.send(error, 500);
+          if(customerData[4] == "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000")
+            return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
           });
-          console.log("result[4]: ");
-          console.log(result[4]);
-          if(result[4]==null) return res.sendStatus(409);
           return res.send(result);
         })
       }
