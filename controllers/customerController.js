@@ -19,10 +19,11 @@ module.exports = function () {
       if(req.body.key == "ckyc") {
         contract.findByCkycId(value, function (error, customerData) {
           if(error) res.send(error, 500);
+          if(customerData[4] == "0000000000000000000000000000000000000000000000000000000000000000")
+            return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
              return hex.hex2str(customerDatum);
           });
-          if(result[4] == "") return res.sendStatus(409);
           return res.send(result);
         })
       }
@@ -30,10 +31,11 @@ module.exports = function () {
       if(req.body.key == "passport") {
         contract.findByPassport(value, function (error, customerData) {
           if(error) res.send(error, 500);
+          if(customerData[4] == "0000000000000000000000000000000000000000000000000000000000000000")
+            return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
           });
-          if(result[4] == "") return res.sendStatus(409);
           return res.send(result);
         })
       }
@@ -41,10 +43,11 @@ module.exports = function () {
       if(req.body.key == "aadhar") {
         contract.findByAadhar(value, function (error, customerData) {
           if(error) res.send(error, 500);
+          if(customerData[4] == "0000000000000000000000000000000000000000000000000000000000000000")
+            return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
           });
-          if(result[4] == "") return res.sendStatus(409);
           return res.send(result);
         })
       }
@@ -52,8 +55,6 @@ module.exports = function () {
       if(req.body.key == "pan") {
         contract.findByPan(value, function (error, customerData) {
           if(error) res.send(error, 500);
-          console.log(customerData[4]);
-          if(customerData[4] == "0000000000000000000000000000000000000000000000000000000000000000")
             return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
