@@ -23,7 +23,7 @@
             </div>
 
             {% include 'partials/query-forms.html' %}
-            <h5 ng-show="user.missing">Sorry, none of the entries match your query.</h5>
+            <h5 ng-show="missing">Sorry, none of the entries match your query.</h5>
             <table ng-show="user && user.ckyc != ''" class="table table-hover">
               <thead>
                 <tr>
@@ -38,10 +38,6 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td>Sorry, your query did not match any existing entries.</td>
-                </tr>
 
                 <tr>
                   <td>{{user.ckyc}}</td>
@@ -121,7 +117,7 @@
         }
 
         function fail (err) {
-          $scope.user = {missing: true};
+          $scope.missing = true;
           toastr.error('Not Found.');
           console.log(err);
         }
