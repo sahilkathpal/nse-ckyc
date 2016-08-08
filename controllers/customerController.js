@@ -55,6 +55,7 @@ module.exports = function () {
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
           });
+          console.log("result[4]: ");
           console.log(result[4]);
           if(result[4] == "") return res.sendStatus(409);
           return res.send(result);
