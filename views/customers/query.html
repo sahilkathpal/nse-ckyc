@@ -109,8 +109,9 @@
           // return;
           $http.post('/customers/fetch', obj)
             .then(function (data) {
-              console.log(data);
+              if(data.status == 409) return $scope.missing = true;
               $scope.user = {
+                missing: false,
                 name: data.data[0],
                 pan: data.data[3],
                 aadhar: data.data[2],
