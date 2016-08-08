@@ -2,7 +2,7 @@ var User = require('../models/User');
 var fs = require('fs');
 var erisC = require("eris-contracts");
 module.exports = function (accountData, ip) {
-  if(!ip) ip = "localhost";
+  if(!ip) ip = "13.75.89.110";
   var erisdbURL = "http://"+ip+":1337/rpc";
   var promise = new Promise (function (resolve, reject) {
     User.findOne({role: 9}, function (err, nse) {
