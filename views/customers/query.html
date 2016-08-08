@@ -109,7 +109,7 @@
           // return;
           $http.post('/customers/fetch', obj)
             .then(function (data) {
-              console.log(data.data);
+              console.log(data.data[4]);
               if(data.data[4] == "") {
                 $scope.user.missing = true;
                 return;
