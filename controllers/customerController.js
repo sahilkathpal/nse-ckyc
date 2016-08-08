@@ -53,7 +53,7 @@ module.exports = function () {
         contract.findByPan(value, function (error, customerData) {
           if(error) res.send(error, 500);
           console.log(customerData[4]);
-          if(customerData[4] == "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000")
+          if(customerData[4] == "0000000000000000000000000000000000000000000000000000000000000000")
             return res.sendStatus(409);
           var result = customerData.map(function (customerDatum) {
             return hex.hex2str(customerDatum);
